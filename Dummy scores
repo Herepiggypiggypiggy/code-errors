@@ -1,0 +1,23 @@
+#include <stdio.h>
+
+int getScores(int number, float* scores)
+{
+    printf("how many scores?\n");
+    for (int i=0; i<number; i++)
+    {
+        printf("Score %i is: \n", i);
+        scanf("%f", &scores[i]);
+        printf("Score %i is %f\n", i, scores[i]);
+    }
+    return number;
+}
+
+int main(void)
+{
+    int number;
+    printf("give me a number\n");
+    scanf("%i", &number);
+    printf("%i\n", number);
+    float scores[5];
+    getScores(number, scores);
+}
