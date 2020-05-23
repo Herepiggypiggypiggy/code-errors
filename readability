@@ -9,14 +9,14 @@ int counting();
 
 int main(void)
 {
-int j=0; int k=0; int l=0;
-counting(j,k,l);
+counting();
 return 0;
 }
 
 
-int counting(int j, int k, int l)
+int counting()
 {
+    int j=0; int k=0; int l=0;
     string s = get_string("Text: ");
     for (int i=0, n = strlen(s); i<n+1; i++)
     {
