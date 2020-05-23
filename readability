@@ -1,0 +1,42 @@
+#include<stdio.h>
+#include<cs50.h>
+#include <string.h>
+
+int calculate();
+int counting();
+
+
+
+int main(void)
+{
+int j=0; int k=0; int l=0;
+counting(j,k,l);
+return 0;
+}
+
+
+int counting(int j, int k, int l)
+{
+    string s = get_string("Text: ");
+    for (int i=0, n = strlen(s); i<n+1; i++)
+    {
+        if (s[i] >= 'a' && s[i] <= 'z' ) { k++; }
+        if (s[i] >= 'A' && s[i] <= 'Z' ) { k++; }
+        if (s[i] == '!' || s[i] == '.' || s[i] == '?') {l++;}
+        if (s[i] == ' ') { j++;}
+    }
+    j= j+1;
+    calculate(j,k,l);
+    return 0;
+}
+
+int calculate(int j, int k, int l)
+{
+    float N = 100/(float)j * (float)k;
+    float S = 100/(float)j * (float)l;
+    float index = 0.0588 * N - 0.296 * S - 15.8;
+    if (index<1) {printf("Before Grade 1\n");}
+    else if (index>1 && index<16) {printf("Grade %.0f\n", index);}
+    else {printf("Grade 16+\n");}
+    return 0;
+}
