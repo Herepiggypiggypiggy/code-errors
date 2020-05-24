@@ -4,7 +4,6 @@
 
 int main(void)
 {
-    int ret; //initialise string compare
     string s="abcdefghijklmnopqrstuvwxyz"; //input key
     char q[26];
     int a = strlen(s);
@@ -24,12 +23,16 @@ int main(void)
             q[s[i]-64]=s[i]+32;
         }
     }
-    string w="abcdefghijklmnopqrstuvwxyz";
-    string r=q; //go from char array to string
-    printf("%s\n",w);
-    printf("%s\n",r);
-    ret = strcmp(r,w);
-    if (ret==0) {printf("The strings are equal");}
-    if (ret!=0) {printf("The strings are NOT equal");}
-    return 0;
+    char z[26]="abcdefghijklmnopqrstuvwxyz"; //compare alphabetical key to alphabet
+    printf("%s\n",q);
+    printf("%s\n",z);
+    int j=0;
+    for (int i=0; i<26; i++)
+    {
+        if(q[i]==z[i])
+        {
+        j++;
+        }
+    }
+    printf("%i",j);
 }
