@@ -1,39 +1,73 @@
 #include<stdio.h>
 #include<string.h>
 #include<cs50.h>
+#include<ctype.h>
 
-int main(void)
+int validate();
+
+int main(int argc, string argv[])
 {
-    string s="abcdefghijklmnopqrstuvwxyz"; //input key
-    char q[26];
-    int a = strlen(s);
-    if (a!=26) //make sure key is correct length
+    if(argc!=2) {printf("Incorrect use\n"); return 1;}
+    string s=argv[1];
+    validate(s);
+    string input=get_string("plaintext:  ");
+    int x=strlen(input);
+    char ciphertext[x];
+    string abc="abcdefghijklmnopqrstuvwxyz";
+    for (int i=0; i<x; i++)
     {
-        printf("Invalid key");
+        //convert upper case
+        if (isupper(input[i]) !=0)
+        {
+            for (int j=0; j<26; j++)
+            {
+                if(abc[j] == tolower(input[i]))
+                {
+                    ciphertext[i] = toupper(s[j]);
+                }
+            }
+        }
+        //convert lower case
+        else if (islower(input[i]) !=0)
+        {
+            for (int j=0; j<26; j++)
+            {
+                if(abc[j] == input[i])
+                {
+                    ciphertext[i] = tolower(s[j]);
+                }
+            }
+        }
+        //non-letter characters
+        else (ciphertext[i]=input[i]);
+    }
+    printf("Your ciphertext is: %s\n",ciphertext);
+}
+
+int validate(string s)
+{
+    int letters=0; int matches=0; int tries=0;
+    //check key length
+    int a=strlen(s);
+    if (a!=26) {printf("Not a valid key\n"); return 1;}
+    //check key integrity
+    for (letters='a'; letters<='z'; letters++)
+    {
+        tries=0;
+        for (tries=0; tries<26; tries++)
+        {
+            if (tolower(s[tries])==letters)
+            {
+                tries=26;
+                matches++;
+            }
+        }
+    }
+    printf("Number of unique letters: %i\n",matches);
+    if(matches!=26)
+    {
+        printf("Not a valid key\n");
         return 1;
     }
-    for(int i=0; i<a; i++) //turn key into lower case alphabet
-    {
-        if (s[i] >= 'a' && s[i] <='z')
-        {
-            q[s[i]-96]=s[i];
-        }
-        else if (s[i] >= 'A' && s[i] <='Z')
-        {
-            q[s[i]-64]=s[i]+32;
-        }
-    }
-    char z[26]="abcdefghijklmnopqrstuvwxyz"; //compare alphabetical key to alphabet
-    printf("%s\n",q);
-    printf("%s\n",z);
-    int j=0;
-    for (int i=0; i<26; i++)
-    {
-        if(q[i]==z[i])
-        {
-        j++;
-        }
-    }
-    printf("%i",j);
     return 0;
 }
